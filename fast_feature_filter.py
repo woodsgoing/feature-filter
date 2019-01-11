@@ -460,9 +460,9 @@ def filter_logistic_regression(dataframe, target, threshold=0.001):
         lb.fit(list(dataframe[col].values.astype('str')))
         dataframe[col] = lb.transform(list(dataframe[col].values.astype('str')))
 
-    import fast_fill_na
+    import fast_impute
     for feature in dataframe.columns:
-        dataframe, acc = fast_fill_na.fill_nan_mean(dataframe,feature)
+        dataframe, acc = fast_impute.impute_mean(dataframe,feature)
 
     X = dataframe.drop([target],axis=1)    
     Y = dataframe[target]
@@ -525,9 +525,9 @@ def filter_linear_regression(dataframe, target, threshold=0.001):
         lb.fit(list(dataframe[col].values.astype('str')))
         dataframe[col] = lb.transform(list(dataframe[col].values.astype('str')))
 
-    import fast_fill_na
+    import fast_impute
     for feature in dataframe.columns:
-        dataframe,acc = fast_fill_na.fill_nan_mean(dataframe,feature)
+        dataframe,acc = fast_impute.impute_mean(dataframe,feature)
 
     x_train = dataframe.drop([target],axis=1)    
     y_train = dataframe[target]
